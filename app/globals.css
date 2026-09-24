@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+/* Colour tokens. The site is dark only: a near-black base with a single champagne accent
+   and a muted sage for small status marks. */
+:root {
+  color-scheme: dark;
+  --bg: #050505;
+  --surface: #0e0e0f;
+  --surface-2: #151516;
+  --border: #242426;
+  --text: #f2efe9;
+  --muted: #9a978f;
+  --accent: #d9b779;
+  --accent-2: #8fbfa8;
+  --accent-soft: rgba(217, 183, 121, 0.1);
+  --on-accent: #0b0a08;
+  --grid: rgba(255, 255, 255, 0.035);
+  --glow: rgba(217, 183, 121, 0.12);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--border);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-space-grotesk);
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: var(--accent); color: var(--on-accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+
+/* ---------- Motion ---------- */
+
+/* Load-in: elements rise and fade in, staggered with --d. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+.rise { animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: var(--d, 0s); }
+
+/* Portrait: fades in, then breathes with a very slow zoom. */
+@keyframes portrait-in { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: scale(1); } }
+@keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+.portrait-in { animation: portrait-in 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) both 0.15s; }
+.breathe { animation: breathe 14s ease-in-out infinite 1.8s; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin-slow { animation: spin 40s linear infinite; }
+.spin-slower { animation: spin 70s linear infinite reverse; }
+
+@keyframes glow-pulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+.glow-pulse { animation: glow-pulse 6s ease-in-out infinite; }
+
+/* Rotating phrase: a stack of lines stepped through with pauses. Line height is fixed at 1.3em. */
+@keyframes words {
+  0%, 20% { transform: translateY(0); }
+  25%, 45% { transform: translateY(-1.3em); }
+  50%, 70% { transform: translateY(-2.6em); }
+  75%, 95% { transform: translateY(-3.9em); }
+  100% { transform: translateY(-5.2em); }
+}
+.words { animation: words 12s cubic-bezier(0.7, 0, 0.3, 1) infinite; }
+
+@keyframes scroll-dot { 0% { transform: translateY(0); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateY(14px); opacity: 0; } }
+.scroll-dot { animation: scroll-dot 1.8s ease-in-out infinite; }
+
+/* Link underline that draws in on hover. */
+.link-draw { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 0.35s ease; }
+.link-draw:hover { background-size: 100% 1px; }
+
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee { animation: marquee 40s linear infinite; }
+/* Phone hero carousel: two rows drifting in opposite directions. */
+.marquee-a { animation: marquee 28s linear infinite; }
+.marquee-b { animation: marquee 34s linear infinite reverse; }
+
+/* A pulse travelling along the pipeline nodes. */
+@keyframes node-pulse {
+  0%, 100% { border-color: var(--border); box-shadow: none; }
+  10% { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+  20% { border-color: var(--border); box-shadow: none; }
+}
+.node-pulse { animation: node-pulse 5s ease-in-out infinite; }
+@keyframes flow { to { background-position: 200% 0; } }
+.flow-line {
+  background: linear-gradient(90deg, var(--border) 0%, var(--accent) 50%, var(--border) 100%);
+  background-size: 200% 100%;
+  animation: flow 2.5s linear infinite;
+}
+
+/* Scroll reveal. Only hides content once the observer script has run, so nothing is lost without JS. */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal-ready [data-reveal].is-visible { opacity: 1; transform: none; }
+
+/* Cards lift slightly on hover. */
+.lift { transition: transform 0.3s ease, border-color 0.3s ease; }
+.lift:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal-ready [data-reveal] { opacity: 1; transform: none; }
+}
