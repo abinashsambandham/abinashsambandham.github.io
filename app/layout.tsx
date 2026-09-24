@@ -29,6 +29,7 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", title, description: profile.intro },
   robots: { index: true, follow: true },
+  verification: { google: site.googleVerification },
 };
 
 export const viewport: Viewport = {

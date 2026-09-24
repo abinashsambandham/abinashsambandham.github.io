@@ -31,6 +31,8 @@ export const site = {
   // Privacy-friendly analytics (GoatCounter). Create a free site at goatcounter.com and put its
   // code here, e.g. "abinash" for abinash.goatcounter.com. Leave empty to load no analytics.
   goatcounter: "",
+  // Google Search Console ownership token (HTML tag method).
+  googleVerification: "9dHDybLeWdL2JEyk73uQtcJCtIGYaxleds26Tw96ZGU",
 };
 
 export const hero = {
