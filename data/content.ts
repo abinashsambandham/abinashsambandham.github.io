@@ -8,7 +8,7 @@ export const profile = {
   intro:
     "Technical Lead at TrusTrace, building multi-agent systems, RAG over customer evidence, document intelligence and the evals that keep them honest, for global fashion brands and retailers across the EU and US.",
   email: "abinashsambandham@gmail.com",
-  linkedin: "https://www.linkedin.com/in/abinash-sambandham",
+  linkedin: "https://www.linkedin.com/in/abinashsambandham/",
   github: "https://github.com/abinashsambandham",
   resume: "/Abinash_Sambandham_Resume.pdf",
 };
