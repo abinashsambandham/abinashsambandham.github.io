@@ -20,12 +20,12 @@ If the site moves to a custom domain, change `site.url` in `data/content.ts`; th
 
 ## Portrait and link preview
 
-The hero serves `public/abinash-portrait-*.avif` with JPEG fallbacks. After replacing the photo, regenerate them (macOS):
+The hero serves `public/abinash-sambandham-portrait-*.avif` with JPEG fallbacks. After replacing the photo, regenerate them (macOS):
 
 ```bash
-sips -s format avif -s formatOptions 60 public/abinash-portrait.jpg --out public/abinash-portrait-974.avif
-sips -s format avif -s formatOptions 60 --resampleWidth 560 public/abinash-portrait.jpg --out public/abinash-portrait-560.avif
-sips -s format jpeg -s formatOptions 78 --resampleWidth 560 public/abinash-portrait.jpg --out public/abinash-portrait-560.jpg
+sips -s format avif -s formatOptions 60 public/abinash-sambandham-portrait.jpg --out public/abinash-sambandham-portrait-974.avif
+sips -s format avif -s formatOptions 60 --resampleWidth 560 public/abinash-sambandham-portrait.jpg --out public/abinash-sambandham-portrait-560.avif
+sips -s format jpeg -s formatOptions 78 --resampleWidth 560 public/abinash-sambandham-portrait.jpg --out public/abinash-sambandham-portrait-560.jpg
 ```
 
 `app/opengraph-image.png` and `app/twitter-image.png` are the 1200×630 card shown when the link is shared. They are static images, so redo them if the photo, name or title changes.

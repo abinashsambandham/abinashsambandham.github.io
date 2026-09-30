@@ -11,23 +11,33 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/abinashsambandham/",
   github: "https://github.com/abinashsambandham",
   resume: "/Abinash_Sambandham_Resume.pdf",
+  // Finance content (Build with Abinash) and personal travel account.
+  instagram: "https://www.instagram.com/buildwithabinash/",
+  youtube: "https://www.youtube.com/@BuildwithAbinash",
+  instagramPersonal: "https://www.instagram.com/abinashh28/",
+};
+
+// Personal-finance content creation, shown on the homepage and the Beyond work page.
+export const creator = {
+  eyebrow: "Beyond engineering",
+  name: "Build with Abinash",
+  title: "I also make Indian personal finance simple.",
+  body: "As Build with Abinash, I explain government schemes, investing, tax and money habits in plain language, in short videos on Instagram and YouTube.",
+  stats: [
+    { value: "9K+", label: "followers on Instagram" },
+    { value: "Millions", label: "of views every month" },
+    { value: "75+", label: "posts published" },
+  ],
+  disclaimer: "Educational content, not investment advice.",
 };
 
 export const site = {
   url: "https://abinashsambandham.github.io",
-  keywords: [
-    "Abinash Sambandham",
-    "AI Engineer",
-    "Technical Lead",
-    "Forward-Deployed Engineer",
-    "LLM",
-    "RAG",
-    "Multi-agent systems",
-    "LangGraph",
-    "Azure AI Foundry",
-    "Document intelligence",
-    "LLM evaluation",
-  ],
+  // Search snippet: name first, under ~155 characters so Google shows it in full.
+  description:
+    "Abinash Sambandham is a Technical Lead in AI Engineering at TrusTrace, building production multi-agent systems, RAG and document AI for global brands.",
+  companyUrl: "https://trustrace.com",
+  portraitAlt: "Abinash Sambandham, Technical Lead in AI Engineering at TrusTrace, studio portrait in a black blazer",
   // Privacy-friendly analytics (GoatCounter). Create a free site at goatcounter.com and put its
   // code here, e.g. "abinash" for abinash.goatcounter.com. Leave empty to load no analytics.
   goatcounter: "",
@@ -338,6 +348,41 @@ export const skills = [
     items: ["MongoDB", "PostgreSQL", "Elasticsearch", "Docker", "Kubernetes", "Jenkins", "Playwright", "SonarQube"],
   },
 ];
+
+// "Beyond work" page (/beyond-work/). Linked from the footer only. Every photo needs its own honest
+// alt text and caption naming Abinash Sambandham; files live in public/photos/.
+export type Photo = { src: string; alt: string; caption: string; width: number; height: number };
+
+export const gallery = {
+  path: "/beyond-work/",
+  label: "Beyond work",
+  title: "Abinash Sambandham, beyond work",
+  metaTitle: "Beyond work · Abinash Sambandham",
+  intro:
+    "When I am not building AI systems, you will find me playing guitar, out on the motorbike or travelling. A few photos from work and beyond.",
+  description:
+    "Photos of Abinash Sambandham, Technical Lead in AI Engineering at TrusTrace, beyond work: portraits, music, motorbike rides and travel.",
+  photos: [
+    { src: "/photos/abinash-sambandham-working-on-laptop.jpg", alt: "Abinash Sambandham, Technical Lead in AI Engineering, working on a laptop at his desk in a white shirt", caption: "Abinash Sambandham · At work", width: 1200, height: 1600 },
+    { src: "/abinash-sambandham-portrait.jpg", alt: "Abinash Sambandham, Technical Lead in AI Engineering at TrusTrace, studio portrait in a black blazer", caption: "Abinash Sambandham · Studio portrait", width: 974, height: 1336 },
+    { src: "/photos/abinash-sambandham-finance-video.jpg", alt: "Abinash Sambandham smiling in a black polo shirt in front of a green backdrop with the word Finance", caption: "Abinash Sambandham · Personal finance video", width: 900, height: 1600 },
+    { src: "/photos/abinash-sambandham-smiling-portrait-pink-shirt.jpg", alt: "Abinash Sambandham smiling in a pink shirt against a cloudy sky", caption: "Abinash Sambandham · Portrait", width: 1600, height: 1066 },
+    { src: "/photos/abinash-sambandham-rooftop-evening.jpg", alt: "Abinash Sambandham sitting on a rooftop wall in a black shirt at dusk", caption: "Abinash Sambandham · Rooftop, evening", width: 1200, height: 1600 },
+    { src: "/photos/abinash-sambandham-sunglasses-portrait.jpg", alt: "Abinash Sambandham in sunglasses and a pink shirt, looking to the side", caption: "Abinash Sambandham · Portrait in sunglasses", width: 1591, height: 1600 },
+    { src: "/photos/abinash-sambandham-sitting-on-stone-steps.jpg", alt: "Abinash Sambandham smiling while sitting on stone steps in a green hoodie", caption: "Abinash Sambandham · Campus steps", width: 1600, height: 1600 },
+    { src: "/photos/abinash-sambandham-playing-guitar.jpg", alt: "Abinash Sambandham playing an acoustic guitar outdoors", caption: "Abinash Sambandham · Playing guitar", width: 1600, height: 1600 },
+    { src: "/photos/abinash-sambandham-riding-motorbike.jpg", alt: "Abinash Sambandham riding a motorbike on a tree-lined road", caption: "Abinash Sambandham · On the road", width: 1066, height: 1600 },
+    { src: "/photos/abinash-sambandham-on-motorbike-forest-road.jpg", alt: "Abinash Sambandham sitting on his motorbike on a forest road", caption: "Abinash Sambandham · Motorbike, forest road", width: 1600, height: 1066 },
+    { src: "/photos/abinash-sambandham-hilltop-above-mountains.jpg", alt: "Abinash Sambandham sitting on a rock on a hilltop above the mountains", caption: "Abinash Sambandham · Hilltop", width: 1600, height: 1200 },
+    { src: "/photos/abinash-sambandham-mountain-view.jpg", alt: "Abinash Sambandham standing by a misty mountain valley", caption: "Abinash Sambandham · In the hills", width: 1600, height: 1066 },
+    { src: "/photos/abinash-sambandham-eiffel-tower-paris.jpg", alt: "Abinash Sambandham in front of the Eiffel Tower in Paris", caption: "Abinash Sambandham · Paris", width: 1066, height: 1600 },
+    { src: "/photos/abinash-sambandham-heritage-palace-doorway.jpg", alt: "Abinash Sambandham standing in the doorway of a heritage palace", caption: "Abinash Sambandham · Heritage palace", width: 1280, height: 1600 },
+    { src: "/photos/abinash-sambandham-ornate-pink-gateway.jpg", alt: "Abinash Sambandham on the steps of an ornate pink painted gateway", caption: "Abinash Sambandham · Pink gateway", width: 1200, height: 1600 },
+    { src: "/photos/abinash-sambandham-winter-city-street.jpg", alt: "Abinash Sambandham on a snowy city street in winter", caption: "Abinash Sambandham · Winter city", width: 1200, height: 1600 },
+    { src: "/photos/abinash-sambandham-lakeside-wind-turbines.jpg", alt: "Abinash Sambandham by a lake with wind turbines behind him", caption: "Abinash Sambandham · Lakeside", width: 1200, height: 1600 },
+    { src: "/photos/abinash-sambandham-boat-trip.jpg", alt: "Abinash Sambandham in sunglasses on a boat trip", caption: "Abinash Sambandham · Boat trip", width: 1200, height: 1600 },
+  ] as Photo[],
+};
 
 export const education = {
   degree: "B.E., Electronics and Communication Engineering",

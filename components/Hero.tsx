@@ -1,4 +1,4 @@
-import { profile, hero } from "@/data/content";
+import { profile, hero, site } from "@/data/content";
 import { CountUp } from "./Motion";
 import MobileHero from "./MobileHero";
 
@@ -7,7 +7,6 @@ const d = (s: number) => ({ "--d": `${s}s` }) as React.CSSProperties;
 // The hero is always dark so it blends with the portrait's black backdrop.
 // Phones and tablets get MobileHero; the three-column layout below is for desktop.
 export default function Hero() {
-  const words = [...hero.expertise, hero.expertise[0]];
 
   return (
     <section id="top" className="relative overflow-hidden bg-[#010101] text-[#f2efe9]">
@@ -83,12 +82,12 @@ export default function Hero() {
 
           <div className="portrait-in relative h-full w-full">
             <picture className="block h-full w-full">
-              <source type="image/avif" srcSet="/abinash-portrait-560.avif 560w, /abinash-portrait-974.avif 974w" sizes="(min-width: 1024px) 480px, 74vw" />
-              <source type="image/jpeg" srcSet="/abinash-portrait-560.jpg 560w, /abinash-portrait.jpg 974w" sizes="(min-width: 1024px) 480px, 74vw" />
+              <source type="image/avif" srcSet="/abinash-sambandham-portrait-560.avif 560w, /abinash-sambandham-portrait-974.avif 974w" sizes="(min-width: 1024px) 480px, 74vw" />
+              <source type="image/jpeg" srcSet="/abinash-sambandham-portrait-560.jpg 560w, /abinash-sambandham-portrait.jpg 974w" sizes="(min-width: 1024px) 480px, 74vw" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/abinash-portrait.jpg"
-                alt={`Portrait of ${profile.name}`}
+                src="/abinash-sambandham-portrait.jpg"
+                alt={site.portraitAlt}
                 width={974}
                 height={1336}
                 decoding="async"
@@ -110,11 +109,13 @@ export default function Hero() {
             aria-label={hero.expertise.join(", ")}
           >
             <span className="words block" aria-hidden>
-              {words.map((w, i) => (
-                <span key={i} className="block text-[#d9b779]">
+              {hero.expertise.map((w) => (
+                <span key={w} className="block text-[#d9b779]">
                   {w}
                 </span>
               ))}
+              {/* Repeats the first item so the loop is seamless; drawn by CSS so text readers see it once. */}
+              <span className="word-dup block text-[#d9b779]" data-word={hero.expertise[0]} />
             </span>
           </p>
           <p className="rise mt-5 text-[15px] leading-relaxed text-[#a9a59c]" style={d(0.7)}>
@@ -143,6 +144,15 @@ export default function Hero() {
             </SocialLink>
             <SocialLink href={profile.github} label="GitHub">
               <path d="M9 19c-4 1.5-4-2-6-2.5m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
+            </SocialLink>
+            <SocialLink href={profile.instagram} label="Instagram, Build with Abinash">
+              <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <path d="M17.2 6.8v.01" />
+            </SocialLink>
+            <SocialLink href={profile.youtube} label="YouTube, Build with Abinash">
+              <rect x="2.5" y="5.5" width="19" height="13" rx="4" />
+              <path d="m10.5 9.5 4 2.5-4 2.5z" />
             </SocialLink>
             <SocialLink href={`mailto:${profile.email}`} label="Email">
               <path d="M3.5 6.5h17v11h-17zM3.5 6.5l8.5 6.5 8.5-6.5" />

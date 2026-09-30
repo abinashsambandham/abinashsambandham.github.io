@@ -3,7 +3,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import { profile, site, skills } from "@/data/content";
+import { profile, site } from "@/data/content";
 import Analytics from "@/components/Analytics";
 
 // Used only for the wordmark in the nav.
@@ -14,21 +14,24 @@ const title = `${profile.name} | ${profile.role}`;
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title,
-  description: profile.intro,
-  keywords: site.keywords,
+  description: site.description,
   authors: [{ name: profile.name, url: site.url }],
   creator: profile.name,
-  alternates: { canonical: "/" },
   openGraph: {
     title,
-    description: profile.intro,
+    description: site.description,
     url: site.url,
     siteName: profile.name,
     locale: "en_US",
     type: "profile",
   },
-  twitter: { card: "summary_large_image", title, description: profile.intro },
-  robots: { index: true, follow: true },
+  twitter: { card: "summary_large_image", title, description: site.description },
+  // Let Google show full snippets and large image previews (Images, Discover) for this site.
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
   verification: { google: site.googleVerification },
 };
 
@@ -37,30 +40,11 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-// Structured data so search engines can show a rich result for the name.
-const personJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: profile.name,
-  jobTitle: profile.role,
-  url: site.url,
-  image: `${site.url}/abinash-portrait.jpg`,
-  email: `mailto:${profile.email}`,
-  worksFor: { "@type": "Organization", name: profile.company },
-  address: { "@type": "PostalAddress", addressLocality: "Coimbatore", addressCountry: "IN" },
-  alumniOf: { "@type": "CollegeOrUniversity", name: "Sri Shakthi Institute of Engineering and Technology" },
-  knowsAbout: skills.slice(0, 3).flatMap((g) => g.items),
-  sameAs: [profile.linkedin, profile.github],
-};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable} ${display.variable}`}>
       <body className="font-sans">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c") }}
-        />
         {children}
         <Analytics />
       </body>

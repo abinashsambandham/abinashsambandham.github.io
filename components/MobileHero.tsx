@@ -1,4 +1,4 @@
-import { profile, hero } from "@/data/content";
+import { profile, hero, site } from "@/data/content";
 
 const d = (s: number) => ({ "--d": `${s}s` }) as React.CSSProperties;
 
@@ -28,12 +28,12 @@ export default function MobileHero() {
           coordinates (SVG viewBox), so it stays aligned at every screen size. */}
       <Portrait className="z-0">
         <picture className="block h-full w-full">
-          <source type="image/avif" srcSet="/abinash-portrait-560.avif 560w, /abinash-portrait-974.avif 974w" sizes="(min-width: 1024px) 480px, 74vw" />
-          <source type="image/jpeg" srcSet="/abinash-portrait-560.jpg 560w, /abinash-portrait.jpg 974w" sizes="(min-width: 1024px) 480px, 74vw" />
+          <source type="image/avif" srcSet="/abinash-sambandham-portrait-560.avif 560w, /abinash-sambandham-portrait-974.avif 974w" sizes="(min-width: 1024px) 480px, 74vw" />
+          <source type="image/jpeg" srcSet="/abinash-sambandham-portrait-560.jpg 560w, /abinash-sambandham-portrait.jpg 974w" sizes="(min-width: 1024px) 480px, 74vw" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/abinash-portrait.jpg"
-            alt={`Portrait of ${profile.name}`}
+            src="/abinash-sambandham-portrait.jpg"
+            alt={site.portraitAlt}
             width={974}
             height={1336}
             fetchPriority="high"
@@ -53,7 +53,7 @@ export default function MobileHero() {
               <ellipse cx={HEAD.cx} cy={HEAD.cy} rx={HEAD.rx} ry={HEAD.ry} fill="url(#head-fade)" />
             </mask>
           </defs>
-          <image href="/abinash-portrait-974.avif" width="974" height="1336" mask="url(#head-mask)" />
+          <image href="/abinash-sambandham-portrait-974.avif" width="974" height="1336" mask="url(#head-mask)" />
         </svg>
       </Portrait>
 

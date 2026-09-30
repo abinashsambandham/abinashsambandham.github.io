@@ -2,11 +2,21 @@
 
 import { useEffect, useRef, useState } from "react";
 
+// Motion is for people watching the page. Background tabs, automated browsers (AI agents, crawlers)
+// and reduced-motion users get the finished page straight away: every section visible, real numbers.
+function motionAllowed() {
+  return (
+    document.visibilityState === "visible" &&
+    !navigator.webdriver &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
 // Reveals every [data-reveal] element as it scrolls into view. Elements added or replaced later
 // (client re-renders, hot reload) are picked up too, so nothing is left hidden.
 export function RevealObserver() {
   useEffect(() => {
-    if (!("IntersectionObserver" in window)) return;
+    if (!("IntersectionObserver" in window) || !motionAllowed()) return;
     const root = document.documentElement;
     root.classList.add("reveal-ready");
 
@@ -43,19 +53,27 @@ export function RevealObserver() {
     window.addEventListener("scroll", sweep, { passive: true });
     window.addEventListener("resize", sweep);
 
+    // If the tab goes to the background, drop the effect so nothing stays hidden while no one watches.
+    const onHide = () => {
+      if (document.visibilityState === "hidden") root.classList.remove("reveal-ready");
+    };
+    document.addEventListener("visibilitychange", onHide);
+
     return () => {
       io.disconnect();
       mo.disconnect();
       cancelAnimationFrame(frame);
       window.removeEventListener("scroll", sweep);
       window.removeEventListener("resize", sweep);
+      document.removeEventListener("visibilitychange", onHide);
       root.classList.remove("reveal-ready");
     };
   }, []);
   return null;
 }
 
-// Counts up to a number once it scrolls into view.
+// Counts up to a number once it scrolls into view. The real value is always what renders first, and
+// it is restored immediately if the animation cannot run or the tab is hidden part-way through.
 export function CountUp({ value, suffix = "", duration = 1600 }: { value: number; suffix?: string; duration?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const decimals = Number.isInteger(value) ? 0 : 1;
@@ -63,11 +81,15 @@ export function CountUp({ value, suffix = "", duration = 1600 }: { value: number
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    setShown(0);
+    if (!el || !("IntersectionObserver" in window) || !motionAllowed()) return;
     let raf = 0;
+    const finish = () => {
+      cancelAnimationFrame(raf);
+      setShown(value);
+    };
+    const onHide = () => document.visibilityState === "hidden" && finish();
     const io = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return;
+      if (!entry.isIntersecting || !motionAllowed()) return;
       io.disconnect();
       const start = performance.now();
       const tick = (now: number) => {
@@ -78,9 +100,11 @@ export function CountUp({ value, suffix = "", duration = 1600 }: { value: number
       raf = requestAnimationFrame(tick);
     });
     io.observe(el);
+    document.addEventListener("visibilitychange", onHide);
     return () => {
       io.disconnect();
-      cancelAnimationFrame(raf);
+      document.removeEventListener("visibilitychange", onHide);
+      finish();
     };
   }, [value, duration]);
 

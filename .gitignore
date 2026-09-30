@@ -7,3 +7,4 @@ next-env.d.ts
 .env*
 .claude/
 Claude outputs/
+photo-originals/
