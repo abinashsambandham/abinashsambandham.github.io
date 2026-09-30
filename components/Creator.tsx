@@ -59,6 +59,14 @@ export default function Creator() {
             >
               <YouTubeIcon /> YouTube
             </a>
+            <a
+              href={profile.instagramPersonal}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-11 items-center gap-2 rounded-lg border border-line bg-surface-2 px-4 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+            >
+              <InstagramIcon /> Personal Instagram
+            </a>
           </div>
           <p className="mt-5 text-xs text-muted">{creator.disclaimer}</p>
         </div>

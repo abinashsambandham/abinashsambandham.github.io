@@ -28,10 +28,10 @@ sips -s format avif -s formatOptions 60 --resampleWidth 560 public/abinash-samba
 sips -s format jpeg -s formatOptions 78 --resampleWidth 560 public/abinash-sambandham-portrait.jpg --out public/abinash-sambandham-portrait-560.jpg
 ```
 
-The Beyond work gallery (and the Creator card) serve `-480.avif` and `-960.avif` copies of each photo, with the full JPEG as fallback. After adding or replacing a gallery photo, regenerate its copies (the portrait needs them too, since it is in the gallery):
+The Creator card serves `-480.avif` and `-960.avif` copies of `public/photos/abinash-sambandham-finance-video.jpg`, with the JPEG as fallback. After replacing that photo, regenerate them:
 
 ```bash
-for w in 480 960; do sips -s format avif -s formatOptions 55 --resampleWidth $w public/photos/NAME.jpg --out public/photos/NAME-$w.avif; done
+for w in 480 960; do sips -s format avif -s formatOptions 55 --resampleWidth $w public/photos/abinash-sambandham-finance-video.jpg --out public/photos/abinash-sambandham-finance-video-$w.avif; done
 ```
 
 `app/opengraph-image.png` and `app/twitter-image.png` are the 1200×630 card shown when the link is shared. They are static images, so redo them if the photo, name or title changes.

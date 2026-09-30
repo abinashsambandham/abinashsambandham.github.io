@@ -1,4 +1,4 @@
-import { caseStudies, creator, education, experience, gallery, moreWork, profile, site, skills } from "@/data/content";
+import { caseStudies, creator, education, experience, moreWork, profile, site, skills } from "@/data/content";
 
 export const dynamic = "force-static";
 
@@ -18,12 +18,7 @@ export function GET() {
     `- Resume (PDF): ${site.url}${profile.resume}`,
     `- Instagram (${creator.name}, personal finance): ${profile.instagram}`,
     `- YouTube (${creator.name}, personal finance): ${profile.youtube}`,
-    `- Instagram (personal, travel): ${profile.instagramPersonal}`,
-    "",
-    "## Pages",
-    "",
-    `- [Portfolio](${site.url}/): experience, case studies and skills`,
-    `- [${gallery.label}](${site.url}${gallery.path}): ${gallery.description}`,
+    `- Instagram (personal): ${profile.instagramPersonal}`,
     "",
     "## Case studies",
     "",

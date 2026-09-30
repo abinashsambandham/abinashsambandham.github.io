@@ -7,9 +7,8 @@ import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Creator from "@/components/Creator";
-import Photos from "@/components/Photos";
 import { RevealObserver } from "@/components/Motion";
-import { gallery, profile, site, skills } from "@/data/content";
+import { profile, site, skills } from "@/data/content";
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 
@@ -41,8 +40,7 @@ const profileJsonLd = {
     url: site.url,
     image: [
       { "@type": "ImageObject", contentUrl: portrait, url: portrait, width: 974, height: 1336, caption: site.portraitAlt },
-      photo("/photos/abinash-sambandham-working-on-laptop.jpg"),
-      photo("/photos/abinash-sambandham-smiling-portrait-pink-shirt.jpg"),
+      photo("/photos/abinash-sambandham-finance-video.jpg"),
     ],
     email: `mailto:${profile.email}`,
     worksFor: { "@type": "Organization", name: profile.company, url: site.companyUrl },
@@ -89,7 +87,6 @@ export default function Home() {
           <Experience />
           <Skills />
           <Creator />
-          <Photos />
           <Contact />
         </div>
       </main>
@@ -98,8 +95,7 @@ export default function Home() {
           © {new Date().getFullYear()} {profile.name} · {profile.role}
         </span>
         <span>
-          {profile.location} · <a href={`mailto:${profile.email}`} className="hover:text-accent">{profile.email}</a> ·{" "}
-          <a href={gallery.path} className="hover:text-accent">{gallery.label}</a>
+          {profile.location} · <a href={`mailto:${profile.email}`} className="hover:text-accent">{profile.email}</a>
         </span>
       </footer>
     </>

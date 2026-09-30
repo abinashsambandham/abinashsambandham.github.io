@@ -1,10 +1,9 @@
 import type { MetadataRoute } from "next";
-import { gallery, site } from "@/data/content";
+import { site } from "@/data/content";
 
 export const dynamic = "force-static";
 
-// Lists the homepage with every photo on it, so they are indexed in Google Images against the name.
-// /beyond-work/ is left out on purpose: it is noindex, so it stays out of web results.
+// The site is a single page; listing its photos helps Google Images index them against the name.
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   return [
@@ -13,7 +12,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 1,
-      images: [...gallery.photos.map((p) => `${site.url}${p.src}`), `${site.url}/opengraph-image.png`],
+      images: [
+        `${site.url}/abinash-sambandham-portrait.jpg`,
+        `${site.url}/photos/abinash-sambandham-finance-video.jpg`,
+        `${site.url}/opengraph-image.png`,
+      ],
     },
   ];
 }
