@@ -73,20 +73,30 @@ function toColumns(photos: Photo[], count: number) {
 
 const desktopColumns = toColumns(gallery.photos, 3);
 
+function avifSrcSet(src: string) {
+  const base = src.replace(/\.jpg$/, "");
+  return `${base}-480.avif 480w, ${base}-960.avif 960w`;
+}
+
 function PhotoCard({ photo, eager }: { photo: Photo; eager: boolean }) {
   return (
     <figure className="group overflow-hidden rounded-2xl border border-line bg-surface">
       <div className="overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={photo.src}
-          alt={photo.alt}
-          width={photo.width}
-          height={photo.height}
-          loading={eager ? "eager" : "lazy"}
-          decoding="async"
-          className="h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]"
-        />
+        {/* AVIF at two widths for the page; the full-size JPEG stays the fallback and the file Google Images indexes. */}
+        <picture>
+          <source type="image/avif" srcSet={avifSrcSet(photo.src)} sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            width={photo.width}
+            height={photo.height}
+            loading={eager ? "eager" : "lazy"}
+            fetchPriority={eager ? "high" : undefined}
+            decoding="async"
+            className="h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]"
+          />
+        </picture>
       </div>
       <figcaption className="border-t border-line px-4 py-3 text-sm text-muted">{photo.caption}</figcaption>
     </figure>

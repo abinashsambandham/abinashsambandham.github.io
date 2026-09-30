@@ -86,12 +86,12 @@ export default function MobileHero() {
         <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#d9b779]">Impact</span>
         <dl className="flex flex-col gap-3.5">
           {hero.impact.map((s, i) => (
-            <div key={s.label} className="flex flex-col gap-3.5">
-              {i > 0 && <span aria-hidden className="h-px w-[150px] bg-gradient-to-r from-white/15 to-transparent" />}
-              <div className="flex flex-col gap-[3px]">
-                <dt className="text-[26px] font-semibold leading-none tracking-[-0.03em] sm:text-4xl">{s.value}</dt>
-                <dd className="text-xs leading-snug text-[#9a978f] sm:text-sm">{s.label}</dd>
-              </div>
+            <div
+              key={s.label}
+              className={`flex flex-col gap-[3px] ${i > 0 ? "relative pt-3.5 before:absolute before:left-0 before:top-0 before:h-px before:w-[150px] before:bg-gradient-to-r before:from-white/15 before:to-transparent" : ""}`}
+            >
+              <dt className="text-[26px] font-semibold leading-none tracking-[-0.03em] sm:text-4xl">{s.value}</dt>
+              <dd className="text-xs leading-snug text-[#9a978f] sm:text-sm">{s.label}</dd>
             </div>
           ))}
         </dl>

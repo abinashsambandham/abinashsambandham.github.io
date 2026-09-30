@@ -106,8 +106,8 @@ export default function Hero() {
           <p
             className="rise mt-2 h-[1.3em] overflow-hidden text-3xl font-semibold leading-[1.3em] tracking-tight"
             style={d(0.6)}
-            aria-label={hero.expertise.join(", ")}
           >
+            <span className="sr-only">{hero.expertise.join(", ")}</span>
             <span className="words block" aria-hidden>
               {hero.expertise.map((w) => (
                 <span key={w} className="block text-[#d9b779]">

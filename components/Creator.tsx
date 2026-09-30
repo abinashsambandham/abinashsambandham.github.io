@@ -6,16 +6,23 @@ export default function Creator() {
     <section id="creator" aria-labelledby="creator-title" className="border-t border-line py-20 sm:py-24">
       <div data-reveal className="grid overflow-hidden rounded-3xl border border-line bg-surface md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
         <div className="relative min-h-[320px] overflow-hidden md:min-h-full">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/photos/abinash-sambandham-finance-video.jpg"
-            alt="Abinash Sambandham presenting a personal-finance video for Build with Abinash"
-            width={900}
-            height={1600}
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-cover object-[50%_20%]"
-          />
+          <picture>
+            <source
+              type="image/avif"
+              srcSet="/photos/abinash-sambandham-finance-video-480.avif 480w, /photos/abinash-sambandham-finance-video-960.avif 960w"
+              sizes="(min-width: 768px) 460px, 100vw"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/photos/abinash-sambandham-finance-video.jpg"
+              alt="Abinash Sambandham presenting a personal-finance video for Build with Abinash"
+              width={900}
+              height={1600}
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover object-[50%_20%]"
+            />
+          </picture>
           <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-surface" />
         </div>
 
