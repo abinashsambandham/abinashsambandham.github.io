@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Logo from "@/components/Logo";
 import JsonLd from "@/components/JsonLd";
 import { InstagramIcon, YouTubeIcon } from "@/components/Creator";
+import { avifSrcSet } from "@/components/Photos";
 import { gallery, profile, site, type Photo } from "@/data/content";
 
 const pageUrl = `${site.url}${gallery.path}`;
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
   title: gallery.metaTitle,
   description: gallery.description,
   alternates: { canonical: gallery.path },
+  // Kept out of web results by choice; the same photos are on the homepage, which Google Images indexes.
+  robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
   openGraph: {
     title: gallery.metaTitle,
     description: gallery.description,
@@ -72,11 +75,6 @@ function toColumns(photos: Photo[], count: number) {
 }
 
 const desktopColumns = toColumns(gallery.photos, 3);
-
-function avifSrcSet(src: string) {
-  const base = src.replace(/\.jpg$/, "");
-  return `${base}-480.avif 480w, ${base}-960.avif 960w`;
-}
 
 function PhotoCard({ photo, eager }: { photo: Photo; eager: boolean }) {
   return (

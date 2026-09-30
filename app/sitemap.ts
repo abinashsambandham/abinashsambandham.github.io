@@ -3,7 +3,8 @@ import { gallery, site } from "@/data/content";
 
 export const dynamic = "force-static";
 
-// Lists each page with the images on it, so photos are indexed in Google Images against the name.
+// Lists the homepage with every photo on it, so they are indexed in Google Images against the name.
+// /beyond-work/ is left out on purpose: it is noindex, so it stays out of web results.
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   return [
@@ -12,14 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 1,
-      images: [`${site.url}/abinash-sambandham-portrait.jpg`, `${site.url}/opengraph-image.png`],
-    },
-    {
-      url: `${site.url}${gallery.path}`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.6,
-      images: gallery.photos.map((p) => `${site.url}${p.src}`),
+      images: [...gallery.photos.map((p) => `${site.url}${p.src}`), `${site.url}/opengraph-image.png`],
     },
   ];
 }

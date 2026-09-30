@@ -7,6 +7,7 @@ import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Creator from "@/components/Creator";
+import Photos from "@/components/Photos";
 import { RevealObserver } from "@/components/Motion";
 import { gallery, profile, site, skills } from "@/data/content";
 import type { Metadata } from "next";
@@ -88,6 +89,7 @@ export default function Home() {
           <Experience />
           <Skills />
           <Creator />
+          <Photos />
           <Contact />
         </div>
       </main>
