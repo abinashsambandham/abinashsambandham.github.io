@@ -18,8 +18,21 @@ const title = `${profile.name} | ${profile.role}`;
 
 // Structured data: a ProfilePage whose main entity is the person, so Google can treat this site as
 // the official profile of Abinash Sambandham (and show his photo against the name).
-const portrait = `${site.url}/abinash-sambandham-portrait.jpg`;
-const photo = (file: string) => `${site.url}${file}`;
+// Each photo carries the rights fields Google Images asks for: who made it, the licence (the
+// footer note) and where to ask for reuse (the contact section).
+const photo = (file: string, width: number, height: number, caption: string) => ({
+  "@type": "ImageObject",
+  contentUrl: `${site.url}${file}`,
+  url: `${site.url}${file}`,
+  width,
+  height,
+  caption,
+  creator: { "@type": "Person", "@id": `${site.url}/#person`, name: profile.name },
+  creditText: profile.name,
+  copyrightNotice: `© ${profile.name}`,
+  license: `${site.url}/#image-license`,
+  acquireLicensePage: `${site.url}/#contact`,
+});
 const profileJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
@@ -39,8 +52,13 @@ const profileJsonLd = {
     description: site.description,
     url: site.url,
     image: [
-      { "@type": "ImageObject", contentUrl: portrait, url: portrait, width: 974, height: 1336, caption: site.portraitAlt },
-      photo("/photos/abinash-sambandham-finance-video.jpg"),
+      photo("/abinash-sambandham-portrait.jpg", 974, 1336, site.portraitAlt),
+      photo(
+        "/photos/abinash-sambandham-finance-video.jpg",
+        900,
+        1600,
+        "Abinash Sambandham presenting a personal-finance video for Build with Abinash",
+      ),
     ],
     email: `mailto:${profile.email}`,
     worksFor: { "@type": "Organization", name: profile.company, url: site.companyUrl },
@@ -91,8 +109,9 @@ export default function Home() {
         </div>
       </main>
       <footer className="mx-auto flex max-w-6xl flex-wrap justify-between gap-4 border-t border-line px-5 py-10 text-xs text-muted sm:px-8">
-        <span>
-          © {new Date().getFullYear()} {profile.name} · {profile.role}
+        <span id="image-license">
+          © {new Date().getFullYear()} {profile.name} · {profile.role} · Photos © {profile.name}, all rights reserved;
+          email for reuse.
         </span>
         <span>
           {profile.location} · <a href={`mailto:${profile.email}`} className="hover:text-accent">{profile.email}</a>
